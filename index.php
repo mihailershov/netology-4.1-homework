@@ -63,7 +63,7 @@ try {
                    value="<?php if (!empty($author)) echo $author ?>">
             <input type="text" name="bookname" placeholder="Название книги" id="bookname"
                    value="<?php if (!empty($bookname)) echo $bookname ?>">
-            <input type="submit" value="Отфильтровать" name="filter">
+            <input type="submit" value="Отфильтровать">
             <button type="reset">Очистить форму</button>
         </form>
     </div>
@@ -93,11 +93,11 @@ try {
             </tr>
             <?php foreach ($statement as $row): ?>
                 <tr>
-                    <td><?php echo $row['name'] ?></td>
-                    <td><?php echo $row['author'] ?></td>
-                    <td><?php echo $row['year'] ?></td>
-                    <td><?php echo $row['genre'] ?></td>
-                    <td><?php echo $row['isbn'] ?></td>
+                    <td><?php echo htmlspecialchars($row['name']) ?></td>
+                    <td><?php echo htmlspecialchars($row['author']) ?></td>
+                    <td><?php echo htmlspecialchars($row['year']) ?></td>
+                    <td><?php echo htmlspecialchars($row['genre']) ?></td>
+                    <td><?php echo htmlspecialchars($row['isbn']) ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
