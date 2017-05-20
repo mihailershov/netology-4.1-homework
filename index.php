@@ -3,16 +3,8 @@
 $host = 'localhost';
 $dbname = 'ershov';
 $dbport = 3306;
-
-if ($_SERVER['HTTP_HOST'] == 'netology.dev') {
-    $dbuser = 'mysql';
-    $dbpassword = 'mysql';
-}
-
-if ($_SERVER['HTTP_HOST'] == 'university.netology.ru') {
-    $dbuser = 'ershov';
-    $dbpassword = 'neto1048';
-}
+$dbuser = 'ershov';
+$dbpassword = 'neto1048';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $dbuser, $dbpassword, [
@@ -56,56 +48,13 @@ try {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        * {
-            font-family: sans-serif;
-        }
-
-        .wrapper {
-            max-width: 1440px;
-            margin: auto;
-        }
-
-        table {
-            border-collapse: collapse;
-            border: 1px solid black;
-            width: 100%;
-        }
-
-        td, tr {
-            padding: 10px;
-        }
-
-        tr:nth-child(2n+1) {
-            background-color: #eeeeee;
-        }
-
-        tr:first-child {
-            background-color: lightgray;
-            border-bottom: 1px solid black;
-        }
-
-        form > input {
-            margin: 0 4px;
-        }
-
-        .form {
-            margin: 20px auto;
-            display: table;
-        }
-        ul>li {
-            list-style-type: none;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="index.css">
+    <title>4.1-homework</title>
 </head>
 <body>
 <div class="wrapper">
-
     <div class="form">
         <form method="GET">
             <input type="text" name="ISBN" placeholder="ISBN" id="ISBN" value="<?php if (!empty($isbn)) echo $isbn ?>">

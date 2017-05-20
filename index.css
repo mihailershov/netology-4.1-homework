@@ -1,0 +1,40 @@
+* {
+    font-family: sans-serif;
+}
+
+.wrapper {
+    max-width: 1440px;
+    margin: auto;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 100%;
+}
+
+td, tr {
+    padding: 10px;
+}
+
+tr:nth-child(2n+1) {
+    background-color: #eeeeee;
+}
+
+tr:first-child {
+    background-color: lightgray;
+    border-bottom: 1px solid black;
+}
+
+form > input {
+    margin: 0 4px;
+}
+
+.form {
+    margin: 20px auto;
+    display: table;
+}
+ul>li {
+    list-style-type: none;
+    text-align: center;
+}
