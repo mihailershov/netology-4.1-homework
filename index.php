@@ -48,7 +48,8 @@ try {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="index.css">
     <title>4.1-homework</title>
@@ -67,39 +68,39 @@ try {
         </form>
     </div>
 
-    <?php if($statement->rowCount() === 0): ?>
-    <ul>
-        <?php if (!empty($isbn) && $statement->rowCount() === 0): ?>
-            <li>По фильтру ISBN ничего не найдено</li>
-        <?php endif; ?>
-        <?php if (!empty($author) && $statement->rowCount() === 0): ?>
-            <li>По фильтру author ничего не найдено</li>
-        <?php endif; ?>
-        <?php if (!empty($bookname) && $statement->rowCount() === 0): ?>
-            <li>По фильтру bookname ничего не найдено</li>
-        <?php endif; ?>
-    </ul>
+    <?php if ($statement->rowCount() === 0): ?>
+        <ul>
+            <?php if (!empty($isbn) && $statement->rowCount() === 0): ?>
+                <li>По фильтру ISBN ничего не найдено</li>
+            <?php endif; ?>
+            <?php if (!empty($author) && $statement->rowCount() === 0): ?>
+                <li>По фильтру author ничего не найдено</li>
+            <?php endif; ?>
+            <?php if (!empty($bookname) && $statement->rowCount() === 0): ?>
+                <li>По фильтру bookname ничего не найдено</li>
+            <?php endif; ?>
+        </ul>
     <?php endif; ?>
 
-    <?php if($statement->rowCount() !== 0): ?>
-    <table>
-        <tr>
-            <td>Название</td>
-            <td>Автор</td>
-            <td>Год</td>
-            <td>Жанр</td>
-            <td>ISBN</td>
-        </tr>
-        <?php foreach ($statement as $row): ?>
+    <?php if ($statement->rowCount() !== 0): ?>
+        <table>
             <tr>
-                <td><?php echo $row['name'] ?></td>
-                <td><?php echo $row['author'] ?></td>
-                <td><?php echo $row['year'] ?></td>
-                <td><?php echo $row['genre'] ?></td>
-                <td><?php echo $row['isbn'] ?></td>
+                <td>Название</td>
+                <td>Автор</td>
+                <td>Год</td>
+                <td>Жанр</td>
+                <td>ISBN</td>
             </tr>
-        <?php endforeach; ?>
-    </table>
+            <?php foreach ($statement as $row): ?>
+                <tr>
+                    <td><?php echo $row['name'] ?></td>
+                    <td><?php echo $row['author'] ?></td>
+                    <td><?php echo $row['year'] ?></td>
+                    <td><?php echo $row['genre'] ?></td>
+                    <td><?php echo $row['isbn'] ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
     <?php endif; ?>
 </div>
 </body>
