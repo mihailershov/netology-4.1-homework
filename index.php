@@ -2,7 +2,6 @@
 
 $host = 'localhost';
 $dbname = 'ershov';
-$dbport = 3306;
 $dbuser = 'ershov';
 $dbpassword = 'neto1048';
 
@@ -15,6 +14,7 @@ try {
 
     if (!empty($_GET['ISBN'])) {
         $isbn = $_GET['ISBN'];
+        $isbn = trim($isbn);
         $isbnQuery = " WHERE isbn LIKE '%$isbn%'";
     }
 
@@ -64,11 +64,11 @@ try {
             <input type="text" name="bookname" placeholder="Название книги" id="bookname"
                    value="<?php if (!empty($bookname)) echo $bookname ?>">
             <input type="submit" value="Отфильтровать">
-            <button type="reset">Очистить форму</button>
         </form>
     </div>
 
     <?php if ($statement->rowCount() === 0): ?>
+        <a href="index.php">Назад</a>
         <ul>
             <?php if (!empty($isbn) && $statement->rowCount() === 0): ?>
                 <li>По фильтру ISBN ничего не найдено</li>

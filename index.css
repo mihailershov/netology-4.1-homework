@@ -38,3 +38,8 @@ ul>li {
     list-style-type: none;
     text-align: center;
 }
+
+a {
+    text-align: center;
+    display: block;
+}
