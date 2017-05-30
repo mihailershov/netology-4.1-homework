@@ -1,47 +1,47 @@
 <?php
-
 $host = 'localhost';
 $dbname = 'ershov';
 $dbuser = 'ershov';
 $dbpassword = 'neto1048';
-
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $dbuser, $dbpassword, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]);
 
     $isbnQuery = $authorQuery = $booknameQuery = '';
+    $varsArray = [];
 
     if (!empty($_GET['ISBN'])) {
-        $isbn = $_GET['ISBN'];
-        $isbn = trim($isbn);
-        $isbnQuery = " WHERE isbn LIKE '%$isbn%'";
+        $isbn = trim($_GET['ISBN']);
+        $varsArray[] = "%$isbn%";
+        $isbnQuery = " WHERE isbn LIKE ?";
     }
-
     if (!empty($_GET['author'])) {
-        $author = $_GET['author'];
+        $author = trim($_GET['author']);
+        $varsArray[] = "%$author%";
         $queryPart = ' OR ';
         if (empty($isbn)) $queryPart = ' WHERE ';
-
-        $authorQuery = "{$queryPart}author LIKE '%$author%'";
+        $authorQuery = "{$queryPart}author LIKE ?";
     }
-
     if (!empty($_GET['bookname'])) {
-        $bookname = $_GET['bookname'];
+        $bookname = trim($_GET['bookname']);
+        $varsArray[] = "%$bookname%";
         $queryPart = ' OR ';
         if (empty($isbn) && empty($author)) $queryPart = ' WHERE ';
+        $booknameQuery = "{$queryPart}name LIKE ?";
+    }
+    $sqlQuery = "SELECT * FROM `books`{$isbnQuery}{$authorQuery}{$booknameQuery}";
+    $statement = $pdo->prepare($sqlQuery);
 
-        $booknameQuery = "{$queryPart}name LIKE '%$bookname%'";
+    if (!$varsArray) {
+        $statement->execute();
+    } else {
+        $statement->execute($varsArray);
     }
 
-    $sqlQuery = "SELECT * FROM books{$isbnQuery}{$authorQuery}{$booknameQuery}";
-
-    $statement = $pdo->prepare($sqlQuery);
-    $statement->execute();
 } catch (PDOException $e) {
     die($e->getMessage());
 }
-
 ?>
 
 <!doctype html>
@@ -105,4 +105,3 @@ try {
 </div>
 </body>
 </html>
-
