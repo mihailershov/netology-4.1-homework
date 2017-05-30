@@ -10,23 +10,11 @@ try {
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]);
 
-    $isbn = $author = $bookname = null;
     $sqlQuery = "SELECT * FROM `books`";
 
-    if (!empty($_GET['ISBN'])) {
-        $isbn = trim($_GET['ISBN']);
-        $isbn = "%$isbn%";
-    }
-
-    if (!empty($_GET['author'])) {
-        $author = trim($_GET['author']);
-        $author = "%$author%";
-    }
-
-    if (!empty($_GET['bookname'])) {
-        $bookname = trim($_GET['bookname']);
-        $bookname = "%$bookname%";
-    }
+    $isbn = !empty($_GET['isbn']) ? '%' . trim($_GET['isbn']) . '%' : null;
+    $author = !empty($_GET['author']) ? '%' . trim($_GET['author']) . '%' : null;
+    $bookname = !empty($_GET['name']) ? '%' . trim($_GET['name']) . '%' : null;
     
     if (!$isbn && !$author && !$bookname) {
         $statement = $pdo->prepare($sqlQuery);
